@@ -78,16 +78,30 @@ Esses arquivos sao versoes CLI, testes ou prototipos do mesmo algoritmo.
 
 ### 1. Criar o ambiente virtual
 
+No linux:
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 ```
-
+No windows:
+**criar**
+```bash
+python -m venv .venv
+```
+**cmd**
+```bash
+.\.venv\Scripts\activate.bat
+```
+**PowerShell**
+```bash
+.\.venv\Scripts\Activate.ps1
+```
 ### 2. Instalar as dependencias
 
 ```bash
 pip install -r requirements.txt
 ```
+**para iniciar o servidor pule para o passo 5
 
 ### 3. Enviar o zip com os arquivos C
 
