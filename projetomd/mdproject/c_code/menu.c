@@ -117,7 +117,41 @@ long long mod_pow(long long base, long long exponent, long long modulus)
 
 long long encotrarD(long long e, long long p, long long q)
 {
-    //Implementar função para encontrar o valor de D
+    // D é o inverso de e mod (p-1)(q-1)
+    // e já é primo em relação a (p-1)(q-1), então o mdc entre eles é 1
+    long long m = (p-1)*(q-1);
+
+    /**  usamos euclides estendido para encontrar o inverso de e mod m
+     * - para cada linha vale a relação r=s*e+t*m
+     * - para avançar para a proxima linha precisamos das duas linhas anteriores
+     *    - q = r0/r1 -> divisão inteira
+     *    - r2 = r0 - q*r1; // s2 = s0 - q*s1 // t2 = t0 - q*t1
+     */
+
+    long long r0 = e, s0 = 1, t0 = 0; // valores da primeira linha -> satisfaz e=s0*e+t0*m
+    long long r1 = m, s1 = 0, t1 = 1; // valores da segunda linha  -> satisfaz m=s1*e+t1*m
+
+    while(r1!=0) // acaba quando chegamos a 0 como resto
+    {
+        long long q = (r0 / r1);    // a divisão já é inteira
+        long long r2 = r0 - q * r1; // proxima linha do algoritimo de euclides
+        long long s2 = s0 - q * s1; // "s" da linha atual
+        long long t2 = t0 - q * t1; // "t" da linha atual
+
+        // avançamos para a proxima linha
+        r0 = r1; s0 = s1; t0 = t1; r1 = r2; s1 = s2; t1 = t2;
+    }
+    // ao chegar em r1=0, a linha anterior é a que satisfaz a equação mdc(e,m)=s*e+t*m
+    // então r0 = mdc(e,m), mas se o mdc(e,m) não for 1, não existe inverso
+    if(r0!=1)
+    {
+        return -1; // sinalizamos erro, mdc(e,[p-1]*[q-1]) não pode ser diferente de 1
+    }
+
+    // caso não surja um erro,  o "s" que queremos será, nesse ponto, o s0 e ele é o inverso de e mod m
+    long long d = ((s0 % m) + m ) % m; // ajustamos para que d seja positivo menor que m
+
+    return d; // retornamos o "d" achado
 }
 
 /* ==============================================================
