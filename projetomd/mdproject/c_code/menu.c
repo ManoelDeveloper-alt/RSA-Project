@@ -101,9 +101,32 @@ int primo(long long n)
     return 1;
 }
 
-int mdc(long long n1, long long n2)
+long long mdc(long long n1, long long n2)
 {
-    //Implementar função para calcular o máximo divisor comum
+    //Caso base
+    long long mdc = 1;
+
+    //Garante que os numeros estão positivos
+    if(n1<0) n1 = -n1;
+    if(n2<0) n2 = -n2;
+
+    //Faz os numeros ficarem em ordem
+    if(n1 > n2)
+    {
+        long long aux = n1;
+        n1 = n2;
+        n2 = aux;
+    }
+
+    for(long long i = n1; i >= 1; i--)
+    {
+        if(n1%i == 0 && n2%i == 0)
+        {
+            mdc = i;
+            break;
+        }
+    }
+    return mdc;
 }
 
 int gerarChavePub(long long primo1, long long primo2, long long expoente){
