@@ -92,7 +92,13 @@ int salvarEmArquivoD(char mensagemdesencriptada[], int tamanho)
 
 int primo(long long n)
 {
-    //Implementar função para verificar se um número é primo
+    //Função para verificar se um número é primo
+    //Retorna 1 para verdadeiro e 0 para falso
+    for (int i = 2; i != n; i++)
+    {
+        if(n % i == 0) return 0;
+    }
+    return 1;
 }
 
 int mdc(long long n1, long long n2)
