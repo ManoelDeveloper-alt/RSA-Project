@@ -140,9 +140,26 @@ int gerarChavePub(long long primo1, long long primo2, long long expoente){
 
 long long mod_pow(long long base, long long exponent, long long modulus)
 {
-    //implementar função de exponenciação modular
-}
+    if (modulus == 1) return 0;
 
+    long long result = 1;
+    
+    base = base % modulus;
+    if (base < 0) base += modulus;
+
+    while (exponent > 0)
+    {
+        if (exponent % 2 == 1)
+        {
+            result = (result * base) % modulus;
+        }
+
+        exponent = exponent / 2;
+        base = (base * base) % modulus;
+    }
+
+    return result;
+}
 
 long long encotrarD(long long e, long long p, long long q)
 {
