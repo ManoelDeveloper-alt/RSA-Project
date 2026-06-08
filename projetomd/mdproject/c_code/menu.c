@@ -133,18 +133,14 @@ int gerarChavePub(long long primo1, long long primo2, long long expoente) {
     long long n = primo1 * primo2; 
 
     if (n < 256) {
-        printf("Erro: Os números primos escolhidos são muito pequenos. O produto p e q deve ser maior ou igual a 256.\n");
         return 1;
     }
 
     if (!primo(primo1) || !primo(primo2)) {
-        printf("Erro: Um ou ambos os números fornecidos não são primos.\n");
         return 1;
     }
 
     criarChavePub(n, expoente);
-    
-    printf("Chave pública gerada com sucesso! (n: %lld, e: %lld)\n", n, expoente);
     return 0;
 }
 
